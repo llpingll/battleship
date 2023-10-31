@@ -1,18 +1,16 @@
 const Ship = (size) => {
     const length = size;
-    const hits = 0;
-    let sunk = false;
+    const hits = [];
 
-    const hit = () => {
-        if (hits < length) {
-            hits++;
+    const hit = (position) => {
+        if (hits.includes(position) || position < 0 || position >= length) {
+            return;
         }
+        hits.push(position);
     }
 
     const isSunk = () => {
-        if (length == hits) {
-            sunk = true;
-        }
+        return (hits.length === length);
     }
 
     return { hit, isSunk, }
