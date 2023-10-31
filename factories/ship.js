@@ -1,5 +1,5 @@
-const ship = (len) => {
-    const length = len;
+const Ship = (size) => {
+    const length = size;
     const hits = 0;
     let sunk = false;
 
@@ -18,4 +18,4 @@ const ship = (len) => {
     return { hit, isSunk, }
 }
 
-export {ship};
+export { Ship };
