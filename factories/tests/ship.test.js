@@ -1,21 +1,37 @@
-import Ship from '../ship'
+import Ship from "../ship"
 
 // Describe creates a block that groups together several related tests.
-describe('Ship', () => {
+describe("Ship", () => {
 
-    let ship = Ship(3);
+    let ship; // Declare ship variable here to make it accessible to all tests
 
-    // console.log(ship);
+    beforeEach(() => {
+        // Create a new instance of Ship before each test
+        ship = Ship(4);
+    });
     
-    test('Creates and initializes a ship', () => {
+    test("Creates and initializes a ship", () => {
         expect(ship).toBeInstanceOf(Object);
-        expect(ship.getLength()).toEqual(3);
+        expect(ship.getLength()).toEqual(4);
         expect(ship.getHits()).toEqual([]);
     });
 
-    test('Takes a hit', () => {
+    test("Takes a hit", () => {
         ship.hit(2);
-        expect(ship.getHits()).toContain(2)
+        expect(ship.getHits()).toContain(2);
     });
 
+    test("Sinks", () => {
+        for (let i = 0; i < ship.getLength(); i++) {
+            ship.hit(i);
+        }
+        expect(ship.isSunk()).toBeTruthy();
+    });
+
+    test("prevent multiple hits at the same spot", () => {
+        ship.hit(1);
+        ship.hit(1);
+        ship.hit(1);
+        expect(ship.getHits().length).toBe(1);
+    });
 })
