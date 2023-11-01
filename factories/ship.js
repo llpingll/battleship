@@ -1,19 +1,30 @@
 const Ship = (size) => {
-    const length = size;
-    const hits = [];
+    // Private variables
+    const _length = size;
+    const _hits = [];
 
+    // getters (Public)
+    const getLength = () => {
+        return _length;
+    }
+
+    const getHits = () => {
+        return _hits;
+    }
+
+    // Methods (Public)
     const hit = (position) => {
-        if (hits.includes(position) || position < 0 || position >= length) {
+        if (_hits.includes(position) || position < 0 || position >= _length) {
             return;
         }
-        hits.push(position);
+        _hits.push(position);
     }
 
     const isSunk = () => {
-        return (hits.length === length);
+        return (_hits.length === _length);
     }
 
-    return { hit, isSunk, }
+    return { hit, isSunk, getLength, getHits, }
 }
 
-export { Ship };
+export default Ship;

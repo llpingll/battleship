@@ -3,10 +3,19 @@ import Ship from '../ship'
 // Describe creates a block that groups together several related tests.
 describe('Ship', () => {
 
-    const ship = Ship(3)
+    let ship = Ship(3);
+
+    // console.log(ship);
     
-    test('creates and initializes a ship', () => {
-        expect(ship).toEqual({ length: 3, hits: 0 });
+    test('Creates and initializes a ship', () => {
+        expect(ship).toBeInstanceOf(Object);
+        expect(ship.getLength()).toEqual(3);
+        expect(ship.getHits()).toEqual([]);
+    });
+
+    test('Takes a hit', () => {
+        ship.hit(2);
+        expect(ship.getHits()).toContain(2)
     });
 
 })
