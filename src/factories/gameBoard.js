@@ -65,24 +65,37 @@ const Gameboard = () => {
         }
 
         // Case any of the neighbour fields are already taken
-        // Case open cells around position
-        if (row > 0 && row < SIZE - 1) {
-            if (isVertical) {
-                if (_board[row - 1][column]) return false; // Check top feild
-                if (_board[row + ship.getLength()][column]) return false; // Check rigth cell
-                for (let i = -1; i < ship.getLength() + 2; i++) {
-                    if (_board[row + i][column + 1]) return false; // Check right column (+ top & bottom of right column)
-                    if (_board[row + i][column - 1]) return false; // Check left column (+ top & bottom of left column)
+        if (isVertical) {
+            for (let i = 0; i < ship.getLength(); i++) {
+              for (let x = -1; x <= 1; x++) { 
+                for (let y = -1; y <= 1; y++) {
+                  if ( // If any true (out of bounds), continue(skip) cell being checked and throwing out of bounds error
+                    row + x + i < 0 || // Check top boundry
+                    row + x + i >= SIZE || // Check bottom boundry
+                    column + y < 0 || // Check left boundry
+                    column + y >= SIZE // Check right boundry
+                  )
+                    continue // This immediately stops the current iteration of the loop and jumps to the next iteration.
+                  if (_board[row + x + i][column + y]) return false
                 }
-            } else {
-                if (_board[row][column - 1]) return false; // Check left cell
-                if (_board[row][column + ship.getLength()]) return false; // Check right cell
-                for (let i = -1; i < ship.getLength() + 2; i++) {
-                    if (_board[row + 1][column + i]) return false; // Check bottom row (+ left & right of bottom row)
-                    if (_board[row - 1][column + i]) return false; // Check top row (+ left & right of top row)
-                }
+              }
             }
-        }
+          } else {
+            for (let i = 0; i < ship.getLength(); i++) {
+              for (let x = -1; x <= 1; x++) {
+                for (let y = -1; y <= 1; y++) {
+                  if (
+                    row + x < 0 ||
+                    row + x >= SIZE ||
+                    column + y + i < 0 ||
+                    column + y + i >= SIZE
+                  )
+                    continue
+                  if (_board[row + x][column + y + i]) return false
+                }
+              }
+            }
+          }
 
         return true;
     }
