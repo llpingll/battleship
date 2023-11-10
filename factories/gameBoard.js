@@ -100,10 +100,49 @@ const Gameboard = () => {
         return true;
     }
 
+    const receiveAttack = (row, column) => {
+        // Out of bounds check
+        if (row < 0 || row >= SIZE || column < 0 || column >= SIZE) {
+            return false
+        }
+        console.log(row, column);
+        if (_board[row][column]) {
+            let hitIndex = 0;
+            // If vertical
+            if (_board[row - 1][column]) {
+                let i = 1;
+                while (row - i >= 0 && _board[row - i][column]) {
+                    hitIndex++;
+                    i++;
+                }
+            }
+            // If horizontal
+            if (_board[row][column - 1]) {
+                let i = 1;
+                while (column - i >= 0 && _board[row][column - i]) {
+                    hitIndex++;
+                    i++;
+                }
+            }
+            _board[row][column].hit(hitIndex);
+            return true;
+        } else {
+            _missedShots[row][column] = true;
+            return false;
+        }
+    }
+
     // Initialize _board & _missedShots on Gameboard instantiation
     initialize();
 
-    return { initialize, getBoard, getMissedShots, placeShip, isPlacementPossible}
+    return {
+        initialize,
+        getBoard,
+        getMissedShots,
+        placeShip,
+        isPlacementPossible,
+        receiveAttack,
+    }
 }
 
 export { Gameboard };
