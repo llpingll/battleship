@@ -58,4 +58,16 @@ describe("Gameboard", () => {
         expect(gameboard.isPlacementPossible(ship, 4, 3, false)).toBe(false);
         expect(gameboard.isPlacementPossible(ship, 1, 4, true)).toBe(true);
     });
+
+    test("Hit ship receives attack", () => {
+        gameboard.placeShip(ship, 1, 2, true);
+        gameboard.receiveAttack(3, 2);
+        expect(gameboard.getBoard()[3][2].getHits().includes(2)).toBe(true);
+    });
+
+    test.only("Keeps track of missed shots", () => {
+        gameboard.placeShip(ship, 1, 1, true);
+        gameboard.receiveAttack(2, 2);
+        expect(gameboard.getMissedShots()[2][2]).toBe(true);
+    });
 });
