@@ -65,9 +65,27 @@ describe("Gameboard", () => {
         expect(gameboard.getBoard()[3][2].getHits().includes(2)).toBe(true);
     });
 
-    test.only("Keeps track of missed shots", () => {
+    test("Keeps track of missed shots", () => {
         gameboard.placeShip(ship, 1, 1, true);
         gameboard.receiveAttack(2, 2);
         expect(gameboard.getMissedShots()[2][2]).toBe(true);
+    });
+
+    test("Determines if game over", () => {
+        expect(gameboard.isGameOver()).toBe(false);
+
+        gameboard.placeShip(ship, 1, 1, true);
+        expect(gameboard.isGameOver()).toBe(false);
+        gameboard.receiveAttack(1, 1);
+        gameboard.receiveAttack(2, 1);
+        gameboard.receiveAttack(3, 1);
+        expect(gameboard.isGameOver()).toBe(true);
+
+        gameboard.placeShip(Ship(4), 6, 2, false);
+        gameboard.receiveAttack(6, 2);
+        gameboard.receiveAttack(6, 3);
+        gameboard.receiveAttack(6, 4);
+        gameboard.receiveAttack(6, 5);
+        expect(gameboard.isGameOver()).toBe(true);
     });
 });
