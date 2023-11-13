@@ -88,4 +88,10 @@ describe("Gameboard", () => {
         gameboard.receiveAttack(6, 5);
         expect(gameboard.isGameOver()).toBe(true);
     });
+
+    test("Place ships randomly", () => {
+        expect(gameboard.getEmptyFeildsQty()).toEqual(100);
+        gameboard.placeShipsRandomly();
+        expect(gameboard.getEmptyFeildsQty()).toEqual(100-17);
+    })
 });

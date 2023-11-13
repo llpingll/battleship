@@ -1,3 +1,5 @@
+import Ship from "./ship";
+
 const Gameboard = () => {
     // Private variables
     const SIZE = 10;
@@ -105,7 +107,7 @@ const Gameboard = () => {
         if (row < 0 || row >= SIZE || column < 0 || column >= SIZE) {
             return false
         }
-        
+
         if (_board[row][column]) {
             let hitIndex = 0;
             // If vertical
@@ -133,19 +135,61 @@ const Gameboard = () => {
     }
 
     const isGameOver = () => {
-        let isBoardEmpty = true;
+        let emptyBoard = true;
 
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 if (_board[i][j]) {
-                    isBoardEmpty = false;
+                    emptyBoard = false;
                     if (!_board[i][j].isSunk()) {
                         return false;
                     }
-                }               
-            }            
+                }
+            }
         }
         return isBoardEmpty ? false : true;
+    }
+
+    const placeShipsRandomly = () => {
+        if (!isBoardEmpty()) return;
+        let shipsPlaced = 0;
+
+        // Initialize ships
+        const ships = [];
+        const carrier = Ship(5);
+        const battleship = Ship(4);
+        const destroyer = Ship(3);
+        const submarine = Ship(3);
+        const patrolBoat = Ship(2);
+        ships.push(carrier, battleship, destroyer, submarine, patrolBoat);
+
+        while (shipsPlaced < 5) {
+            const row = Math.floor(Math.random() * 10);
+            const column = Math.floor(Math.random() * 10);
+            const isVertical = Math.floor((Math.random() * 2)) === 1 ? true : false;
+            if (placeShip(ships[shipsPlaced], row, column, isVertical)) {
+                shipsPlaced++;   
+            }
+        }
+    }
+
+    const isBoardEmpty = () => {
+        for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+                if (_board[i][j]) return false;
+            }
+        }
+        return true;
+    }
+
+    const getEmptyFeildsQty = () => {
+        let result = 0;
+        for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+                if (_board[i][j] === null) result++;
+            }
+        }
+        return result;
     }
 
     // Initialize _board & _missedShots on Gameboard instantiation
@@ -159,6 +203,8 @@ const Gameboard = () => {
         isPlacementPossible,
         receiveAttack,
         isGameOver,
+        placeShipsRandomly,
+        getEmptyFeildsQty,
     }
 }
 
