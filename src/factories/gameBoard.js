@@ -105,7 +105,7 @@ const Gameboard = () => {
         if (row < 0 || row >= SIZE || column < 0 || column >= SIZE) {
             return false
         }
-        console.log(row, column);
+        
         if (_board[row][column]) {
             let hitIndex = 0;
             // If vertical
@@ -132,6 +132,22 @@ const Gameboard = () => {
         }
     }
 
+    const isGameOver = () => {
+        let isBoardEmpty = true;
+
+        for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+                if (_board[i][j]) {
+                    isBoardEmpty = false;
+                    if (!_board[i][j].isSunk()) {
+                        return false;
+                    }
+                }               
+            }            
+        }
+        return isBoardEmpty ? false : true;
+    }
+
     // Initialize _board & _missedShots on Gameboard instantiation
     initialize();
 
@@ -142,6 +158,7 @@ const Gameboard = () => {
         placeShip,
         isPlacementPossible,
         receiveAttack,
+        isGameOver,
     }
 }
 
