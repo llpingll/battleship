@@ -6,12 +6,12 @@ describe("Player", () => {
 
     let ship;
     let player;
-    let aiGameboard;
+    let gameboard;
 
     beforeEach(() => {
         ship = Ship(4);
         player = Player("Player");
-        aiGameboard = Gameboard();
+        gameboard = Gameboard();
     });
 
     test("Creates and initializes a player object", () => {
@@ -22,20 +22,20 @@ describe("Player", () => {
     });
 
     test("Attacks successfully & prevents double hits", () => {
-        player.attack(0, 0, aiGameboard);
+        player.attack(0, 0, gameboard);
         expect(player.hasAlreadyHit(0, 0)).toBe(true);
 
-        player.attack(0, 0, aiGameboard);
+        player.attack(0, 0, gameboard);
         expect(player.getAlreadyHitCoOrds().length).toEqual(1);
     });
 
     test("Randomly attacks successfully & prevents double hits", () => {
-        aiGameboard.placeShip(ship, 1, 3, true);
+        gameboard.placeShip(ship, 1, 3, true);
         while (player.getAlreadyHitCoOrds().length < 100) {
-            player.randomAttack(aiGameboard);
+            player.randomAttack(gameboard);
         }
 
-        expect(aiGameboard.isGameOver()).toEqual(true);
-        expect(aiGameboard.getEmptyFeildsQty()).toEqual(100 - 4);
+        expect(gameboard.isGameOver()).toEqual(true);
+        expect(gameboard.getEmptyFeildsQty()).toEqual(100 - 4);
     });
 });
