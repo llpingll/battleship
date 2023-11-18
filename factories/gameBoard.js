@@ -111,7 +111,7 @@ const Gameboard = () => {
         if (_board[row][column]) {
             let hitIndex = 0;
             // If vertical
-            if (_board[row - 1][column]) {
+            if (column > 0 && _board[row - 1][column]) {
                 let i = 1;
                 while (row - i >= 0 && _board[row - i][column]) {
                     hitIndex++;
@@ -119,7 +119,7 @@ const Gameboard = () => {
                 }
             }
             // If horizontal
-            if (_board[row][column - 1]) {
+            if (row > 0 && _board[row][column - 1]) {
                 let i = 1;
                 while (column - i >= 0 && _board[row][column - i]) {
                     hitIndex++;
@@ -147,7 +147,7 @@ const Gameboard = () => {
                 }
             }
         }
-        return isBoardEmpty ? false : true;
+        return emptyBoard ? false : true;
     }
 
     const placeShipsRandomly = () => {
