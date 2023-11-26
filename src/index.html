@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/b68b3f9e8e.js" crossorigin="anonymous"></script>
+    <script src="game.js" defer></script>
+    <script src="dom.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Battleship</h1>
+    </header>
+
+    <main>
+        <div class="grid" id="playerBoard">
+            <div class="row">
+                <div class="cell" data-row="0" data-column="0">null</div>
+                <div class="cell" data-row="0" data-column="1">null</div>
+                <div class="cell" data-row="0" data-column="2">null</div>
+                <div class="cell" data-row="0" data-column="3">null</div>
+                <div class="cell" data-row="0" data-column="4">null</div>
+                <div class="cell" data-row="0" data-column="5">null</div>
+                <div class="cell" data-row="0" data-column="6">null</div>
+                <div class="cell" data-row="0" data-column="7">null</div>
+                <div class="cell" data-row="0" data-column="8">null</div>
+                <div class="cell" data-row="0" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="1" data-column="0">null</div>
+                <div class="cell" data-row="1" data-column="1">null</div>
+                <div class="cell" data-row="1" data-column="2">null</div>
+                <div class="cell" data-row="1" data-column="3">null</div>
+                <div class="cell" data-row="1" data-column="4">null</div>
+                <div class="cell" data-row="1" data-column="5">null</div>
+                <div class="cell" data-row="1" data-column="6">null</div>
+                <div class="cell" data-row="1" data-column="7">null</div>
+                <div class="cell" data-row="1" data-column="8">null</div>
+                <div class="cell" data-row="1" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="2" data-column="0">null</div>
+                <div class="cell" data-row="2" data-column="1">null</div>
+                <div class="cell" data-row="2" data-column="2">null</div>
+                <div class="cell" data-row="2" data-column="3">null</div>
+                <div class="cell" data-row="2" data-column="4">null</div>
+                <div class="cell" data-row="2" data-column="5">null</div>
+                <div class="cell" data-row="2" data-column="6">null</div>
+                <div class="cell" data-row="2" data-column="7">null</div>
+                <div class="cell" data-row="2" data-column="8">null</div>
+                <div class="cell" data-row="2" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="3" data-column="0">null</div>
+                <div class="cell" data-row="3" data-column="1">null</div>
+                <div class="cell" data-row="3" data-column="2">null</div>
+                <div class="cell" data-row="3" data-column="3">null</div>
+                <div class="cell" data-row="3" data-column="4">null</div>
+                <div class="cell" data-row="3" data-column="5">null</div>
+                <div class="cell" data-row="3" data-column="6">null</div>
+                <div class="cell" data-row="3" data-column="7">null</div>
+                <div class="cell" data-row="3" data-column="8">null</div>
+                <div class="cell" data-row="3" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="4" data-column="0">null</div>
+                <div class="cell" data-row="4" data-column="1">null</div>
+                <div class="cell" data-row="4" data-column="2">null</div>
+                <div class="cell" data-row="4" data-column="3">null</div>
+                <div class="cell" data-row="4" data-column="4">null</div>
+                <div class="cell" data-row="4" data-column="5">null</div>
+                <div class="cell" data-row="4" data-column="6">null</div>
+                <div class="cell" data-row="4" data-column="7">null</div>
+                <div class="cell" data-row="4" data-column="8">null</div>
+                <div class="cell" data-row="4" data-column="9">null</div>
+                <div class="cell" data-row="4" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="5" data-column="0">null</div>
+                <div class="cell" data-row="5" data-column="1">null</div>
+                <div class="cell" data-row="5" data-column="2">null</div>
+                <div class="cell" data-row="5" data-column="3">null</div>
+                <div class="cell" data-row="5" data-column="4">null</div>
+                <div class="cell" data-row="5" data-column="5">null</div>
+                <div class="cell" data-row="5" data-column="6">null</div>
+                <div class="cell" data-row="5" data-column="7">null</div>
+                <div class="cell" data-row="5" data-column="8">null</div>
+                <div class="cell" data-row="5" data-column="9">null</div>
+                <div class="cell" data-row="5" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="6" data-column="0">null</div>
+                <div class="cell" data-row="6" data-column="1">null</div>
+                <div class="cell" data-row="6" data-column="2">null</div>
+                <div class="cell" data-row="6" data-column="3">null</div>
+                <div class="cell" data-row="6" data-column="4">null</div>
+                <div class="cell" data-row="6" data-column="5">null</div>
+                <div class="cell" data-row="6" data-column="6">null</div>
+                <div class="cell" data-row="6" data-column="7">null</div>
+                <div class="cell" data-row="6" data-column="8">null</div>
+                <div class="cell" data-row="6" data-column="9">null</div>
+                <div class="cell" data-row="6" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="7" data-column="0">null</div>
+                <div class="cell" data-row="7" data-column="1">null</div>
+                <div class="cell" data-row="7" data-column="2">null</div>
+                <div class="cell" data-row="7" data-column="3">null</div>
+                <div class="cell" data-row="7" data-column="4">null</div>
+                <div class="cell" data-row="7" data-column="5">null</div>
+                <div class="cell" data-row="7" data-column="6">null</div>
+                <div class="cell" data-row="7" data-column="7">null</div>
+                <div class="cell" data-row="7" data-column="8">null</div>
+                <div class="cell" data-row="7" data-column="9">null</div>
+                <div class="cell" data-row="7" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="8" data-column="0">null</div>
+                <div class="cell" data-row="8" data-column="1">null</div>
+                <div class="cell" data-row="8" data-column="2">null</div>
+                <div class="cell" data-row="8" data-column="3">null</div>
+                <div class="cell" data-row="8" data-column="4">null</div>
+                <div class="cell" data-row="8" data-column="5">null</div>
+                <div class="cell" data-row="8" data-column="6">null</div>
+                <div class="cell" data-row="8" data-column="7">null</div>
+                <div class="cell" data-row="8" data-column="8">null</div>
+                <div class="cell" data-row="8" data-column="9">null</div>
+                <div class="cell" data-row="8" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="9" data-column="0">null</div>
+                <div class="cell" data-row="9" data-column="1">null</div>
+                <div class="cell" data-row="9" data-column="2">null</div>
+                <div class="cell" data-row="9" data-column="3">null</div>
+                <div class="cell" data-row="9" data-column="4">null</div>
+                <div class="cell" data-row="9" data-column="5">null</div>
+                <div class="cell" data-row="9" data-column="6">null</div>
+                <div class="cell" data-row="9" data-column="7">null</div>
+                <div class="cell" data-row="9" data-column="8">null</div>
+                <div class="cell" data-row="9" data-column="9">null</div>
+                <div class="cell" data-row="9" data-column="10">null</div>
+            </div>
+        </div>
+
+        <div class="grid" id="computerBoard">
+            <div class="row">
+                <div class="cell" data-row="0" data-column="0">null</div>
+                <div class="cell" data-row="0" data-column="1">null</div>
+                <div class="cell" data-row="0" data-column="2">null</div>
+                <div class="cell" data-row="0" data-column="3">null</div>
+                <div class="cell" data-row="0" data-column="4">null</div>
+                <div class="cell" data-row="0" data-column="5">null</div>
+                <div class="cell" data-row="0" data-column="6">null</div>
+                <div class="cell" data-row="0" data-column="7">null</div>
+                <div class="cell" data-row="0" data-column="8">null</div>
+                <div class="cell" data-row="0" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="1" data-column="0">null</div>
+                <div class="cell" data-row="1" data-column="1">null</div>
+                <div class="cell" data-row="1" data-column="2">null</div>
+                <div class="cell" data-row="1" data-column="3">null</div>
+                <div class="cell" data-row="1" data-column="4">null</div>
+                <div class="cell" data-row="1" data-column="5">null</div>
+                <div class="cell" data-row="1" data-column="6">null</div>
+                <div class="cell" data-row="1" data-column="7">null</div>
+                <div class="cell" data-row="1" data-column="8">null</div>
+                <div class="cell" data-row="1" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="2" data-column="0">null</div>
+                <div class="cell" data-row="2" data-column="1">null</div>
+                <div class="cell" data-row="2" data-column="2">null</div>
+                <div class="cell" data-row="2" data-column="3">null</div>
+                <div class="cell" data-row="2" data-column="4">null</div>
+                <div class="cell" data-row="2" data-column="5">null</div>
+                <div class="cell" data-row="2" data-column="6">null</div>
+                <div class="cell" data-row="2" data-column="7">null</div>
+                <div class="cell" data-row="2" data-column="8">null</div>
+                <div class="cell" data-row="2" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="3" data-column="0">null</div>
+                <div class="cell" data-row="3" data-column="1">null</div>
+                <div class="cell" data-row="3" data-column="2">null</div>
+                <div class="cell" data-row="3" data-column="3">null</div>
+                <div class="cell" data-row="3" data-column="4">null</div>
+                <div class="cell" data-row="3" data-column="5">null</div>
+                <div class="cell" data-row="3" data-column="6">null</div>
+                <div class="cell" data-row="3" data-column="7">null</div>
+                <div class="cell" data-row="3" data-column="8">null</div>
+                <div class="cell" data-row="3" data-column="9">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="4" data-column="0">null</div>
+                <div class="cell" data-row="4" data-column="1">null</div>
+                <div class="cell" data-row="4" data-column="2">null</div>
+                <div class="cell" data-row="4" data-column="3">null</div>
+                <div class="cell" data-row="4" data-column="4">null</div>
+                <div class="cell" data-row="4" data-column="5">null</div>
+                <div class="cell" data-row="4" data-column="6">null</div>
+                <div class="cell" data-row="4" data-column="7">null</div>
+                <div class="cell" data-row="4" data-column="8">null</div>
+                <div class="cell" data-row="4" data-column="9">null</div>
+                <div class="cell" data-row="4" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="5" data-column="0">null</div>
+                <div class="cell" data-row="5" data-column="1">null</div>
+                <div class="cell" data-row="5" data-column="2">null</div>
+                <div class="cell" data-row="5" data-column="3">null</div>
+                <div class="cell" data-row="5" data-column="4">null</div>
+                <div class="cell" data-row="5" data-column="5">null</div>
+                <div class="cell" data-row="5" data-column="6">null</div>
+                <div class="cell" data-row="5" data-column="7">null</div>
+                <div class="cell" data-row="5" data-column="8">null</div>
+                <div class="cell" data-row="5" data-column="9">null</div>
+                <div class="cell" data-row="5" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="6" data-column="0">null</div>
+                <div class="cell" data-row="6" data-column="1">null</div>
+                <div class="cell" data-row="6" data-column="2">null</div>
+                <div class="cell" data-row="6" data-column="3">null</div>
+                <div class="cell" data-row="6" data-column="4">null</div>
+                <div class="cell" data-row="6" data-column="5">null</div>
+                <div class="cell" data-row="6" data-column="6">null</div>
+                <div class="cell" data-row="6" data-column="7">null</div>
+                <div class="cell" data-row="6" data-column="8">null</div>
+                <div class="cell" data-row="6" data-column="9">null</div>
+                <div class="cell" data-row="6" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="7" data-column="0">null</div>
+                <div class="cell" data-row="7" data-column="1">null</div>
+                <div class="cell" data-row="7" data-column="2">null</div>
+                <div class="cell" data-row="7" data-column="3">null</div>
+                <div class="cell" data-row="7" data-column="4">null</div>
+                <div class="cell" data-row="7" data-column="5">null</div>
+                <div class="cell" data-row="7" data-column="6">null</div>
+                <div class="cell" data-row="7" data-column="7">null</div>
+                <div class="cell" data-row="7" data-column="8">null</div>
+                <div class="cell" data-row="7" data-column="9">null</div>
+                <div class="cell" data-row="7" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="8" data-column="0">null</div>
+                <div class="cell" data-row="8" data-column="1">null</div>
+                <div class="cell" data-row="8" data-column="2">null</div>
+                <div class="cell" data-row="8" data-column="3">null</div>
+                <div class="cell" data-row="8" data-column="4">null</div>
+                <div class="cell" data-row="8" data-column="5">null</div>
+                <div class="cell" data-row="8" data-column="6">null</div>
+                <div class="cell" data-row="8" data-column="7">null</div>
+                <div class="cell" data-row="8" data-column="8">null</div>
+                <div class="cell" data-row="8" data-column="9">null</div>
+                <div class="cell" data-row="8" data-column="10">null</div>
+            </div>
+            <div class="row">
+                <div class="cell" data-row="9" data-column="0">null</div>
+                <div class="cell" data-row="9" data-column="1">null</div>
+                <div class="cell" data-row="9" data-column="2">null</div>
+                <div class="cell" data-row="9" data-column="3">null</div>
+                <div class="cell" data-row="9" data-column="4">null</div>
+                <div class="cell" data-row="9" data-column="5">null</div>
+                <div class="cell" data-row="9" data-column="6">null</div>
+                <div class="cell" data-row="9" data-column="7">null</div>
+                <div class="cell" data-row="9" data-column="8">null</div>
+                <div class="cell" data-row="9" data-column="9">null</div>
+                <div class="cell" data-row="9" data-column="10">null</div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- <button id="restart" type="button">Restart</button> -->
+    <footer class="footer">
+        <p>||Ping|| © <script>document.write(new Date().getFullYear())</script>
+        <a href="https://github.com/llpingll" target="_blank"><i class="fa-brands fa-github"></i></a>
+        </p>
+    </footer>
+</body>
+</html>
