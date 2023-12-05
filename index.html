@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="#">
     <script src="https://kit.fontawesome.com/b68b3f9e8e.js" crossorigin="anonymous"></script>
-    <!-- <script type="module" src="game.js" defer></script>
-    <script type="module" src="dom.js" defer></script> -->
+    <script type="module" src="dom.js" defer></script>
+    <script type="module" src="game.js" defer></script>
 </head>
 <body>
     <header>
@@ -141,9 +142,9 @@
 
         <div class="grid" id="computerBoard">
             <div class="row">
-                <div class="cell" data-row="0" data-column="0"></div>
-                <div class="cell" data-row="0" data-column="1"></div>
-                <div class="cell" data-row="0" data-column="2"></div>
+                <div class="cell ship" data-row="0" data-column="0"></div>
+                <div class="cell missed" data-row="0" data-column="1"></div>
+                <div class="cell hit" data-row="0" data-column="2"></div>
                 <div class="cell" data-row="0" data-column="3"></div>
                 <div class="cell" data-row="0" data-column="4"></div>
                 <div class="cell" data-row="0" data-column="5"></div>

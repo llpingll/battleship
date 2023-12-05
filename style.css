@@ -48,6 +48,18 @@ main {
     width: 100%;
 }
 
+.cell.ship {
+    background-color: rgb(49, 48, 47);
+}
+
+.cell.missed {
+    background-color: green;
+}
+
+.cell.hit {
+    background-color: red;
+}
+
 #computerBoard .row div:hover {
     background: rgba(0, 0, 0, 0.1);
 }
