@@ -1,6 +1,7 @@
 import { Player } from "./factories/player";
 import { Gameboard } from "./factories/gameBoard";
 import Ship from "./factories/ship";
+import { dom } from "./dom";
 
 var game = (() => {
     // Instantiate objects
@@ -21,10 +22,8 @@ var game = (() => {
         computerGameboard = Gameboard();
         playerGameboard = Gameboard();
         // display placement modal (ignore until modal is completed)
-        // Place player ships (first do random placement then include click events for player placements)
-        playerGameboard.placeShipsRandomly();
-        // Randomly place computer ships
-        computerGameboard.placeShipsRandomly();
+        playerGameboard.placeShipsRandomly();// Place player ships (first do random placement then include click events for player placements)
+        computerGameboard.placeShipsRandomly(); // Randomly place computer ships
         // hide placement modal (ignore for now until modal is completed)
     }
 
@@ -55,8 +54,10 @@ var game = (() => {
 
         if (player.hasAlreadyHit(row, column)) return;
         player.attack(row, column, computerGameboard);
+        dom.renderGameboard(computerGameboard);
         if(computerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
         computer.randomAttack(playerGameboard);
+        dom.renderGameboard(playerGameboard);
         if(playerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
     }
 
