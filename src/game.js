@@ -1,7 +1,7 @@
-import { Player } from "./factories/player";
-import { Gameboard } from "./factories/gameBoard";
-import Ship from "./factories/ship";
-import { dom } from "./dom";
+import { Player } from "./factories/player.js";
+import { Gameboard } from "./factories/gameBoard.js";
+import Ship from "./factories/ship.js";
+import { dom } from "./dom.js";
 
 var game = (() => {
     // Instantiate objects
@@ -14,9 +14,13 @@ var game = (() => {
     playerGameboard.placeShipsRandomly();
     computerGameboard.placeShipsRandomly();
 
+    // Publish events
+    // const createComputerGameboardUpdateEvent = () => new Event('computerGameboardUpdated');
+    // const createPlayerGameboardUpdateEvent = () => new Event('playerGameboardUpdated');
+    
     // Function definitions
     const resetGame = () => {
-        // Initialize gameboard & players
+        // Reset gameboard & players
         player = Player("Player");
         computer = Player("Computer");
         computerGameboard = Gameboard();
@@ -55,13 +59,19 @@ var game = (() => {
         if (player.hasAlreadyHit(row, column)) return;
         player.attack(row, column, computerGameboard);
         dom.renderGameboard(computerGameboard);
-        if(computerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
+        // window.dispatchEvent(createComputerGameboardUpdateEvent());
+        if (computerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
         computer.randomAttack(playerGameboard);
         dom.renderGameboard(playerGameboard);
-        if(playerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
+        // window.dispatchEvent(createPlayerGameboardUpdateEvent());
+        if (playerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
     }
 
-    return { playRound, computerGameboard, playerGameboard }
+    const printHello = () => {
+        console.log("Hello");
+    }
+
+    return { playRound, computerGameboard, playerGameboard, resetGame, printHello }
 })();
 
 export { game };

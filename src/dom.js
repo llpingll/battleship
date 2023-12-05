@@ -1,11 +1,29 @@
-import { playRound } from './game';
+import { game } from "./game.js";
 
 const dom = (() => {
     // Cache dom gameboards
-    const playerGrid = document.getElementById('playerGrid');
-    const computerGrid = document.getElementById('computerGrid');
-    console.log("hello");
-    // Example of creating grid programmatically
+    const playerGrid = document.getElementById("playerBoard");
+    const computerGrid = document.getElementById("computerBoard");
+
+    // functions
+
+
+    // Subscribe events
+    // window.addEventListener('computerGameboardUpdate', () => {
+    //     dom.renderGameboard(game.computerGameboard);
+    // });
+
+    // window.addEventListener('playerGameboardUpdate', () => {
+    //     dom.renderGameboard(game.playerGameboard);
+    // });
+
+    computerGrid.addEventListener("click", game.printHello);
+
+})();
+
+export { dom };
+
+ // Example of creating grid programmatically
     // function renderGameboard() {
     //     for (let row = 0; row < numRows; row++) {
     //         for (let column = 0; column < numColumns; column++) {
@@ -17,7 +35,3 @@ const dom = (() => {
     //          }
     //     }
     // }
-
-    computerGrid.addEventListener("click", playRound);
-
-})();
