@@ -14,10 +14,6 @@ var game = (() => {
     playerGameboard.placeShipsRandomly();
     computerGameboard.placeShipsRandomly();
 
-    // Publish events
-    // const createComputerGameboardUpdateEvent = () => new Event('computerGameboardUpdated');
-    // const createPlayerGameboardUpdateEvent = () => new Event('playerGameboardUpdated');
-    
     // Function definitions
     const resetGame = () => {
         // Reset gameboard & players
@@ -53,25 +49,26 @@ var game = (() => {
     const playRound = (event) => {
         // Get domBoard co-ordinates
         const cell = event.target;
-        const row = cell.getAttribute('data-row');
-        const column = cell.getAttribute('data-column');
-
+        const row = Number(cell.getAttribute('data-row'));
+        const column = Number(cell.getAttribute('data-column'));
+        // console.log(row, column);
         if (player.hasAlreadyHit(row, column)) return;
         player.attack(row, column, computerGameboard);
-        dom.renderGameboard(computerGameboard);
+        // console.log("Attacked")
+        dom.renderGameboard(computerGameboard, computer, player);
         // window.dispatchEvent(createComputerGameboardUpdateEvent());
         if (computerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
         computer.randomAttack(playerGameboard);
-        dom.renderGameboard(playerGameboard);
+        dom.renderGameboard(playerGameboard, player, computer);
         // window.dispatchEvent(createPlayerGameboardUpdateEvent());
         if (playerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
     }
 
-    const printHello = () => {
-        console.log("Hello");
-    }
-
-    return { playRound, computerGameboard, playerGameboard, resetGame, printHello }
+    return { computerGameboard, playerGameboard, player, computer, playRound, resetGame }
 })();
 
 export { game };
+
+// Publish events
+// const createComputerGameboardUpdateEvent = () => new Event('computerGameboardUpdated');
+// const createPlayerGameboardUpdateEvent = () => new Event('playerGameboardUpdated');

@@ -6,56 +6,38 @@ const dom = (() => {
     const computerGrid = document.getElementById("computerBoard");
 
     // functions
-    const renderInitialGameboards = () => {
-        const grids = [playerGrid, computerGrid];
-
-        grids.forEach(grid => {
-            for (let row = 0; row < 10; row++) {
-                const rowElement = document.createElement("div");
-                rowElement.classList.add('row');
-                for (let column = 0; column < 10; column++) {
-                    const cellElement = document.createElement("div");
-                    cellElement.dataset.row = row;
-                    cellElement.dataset.column = column;
-                    cellElement.classList.add("default");
-                    rowElement.appendChild(cellElement);
-                }
-                grid.appendChild(rowElement);
-            }
-        });
-    }
-
     const renderGameboard = (gameboard, owner, enemy) => {
         const board = gameboard.getBoard();
         const domGrid = (owner.getName() === "Player") ? playerGrid : computerGrid;
         domGrid.innerHTML = '';
 
         for (let row = 0; row < board.length; row++) {
-            const rowElement = document.createElement("div");
-            rowElement.classList.add('row');
             for (let column = 0; column < board[row].length; column++) {
                 const cellElement = document.createElement("div");
                 cellElement.dataset.row = row;
                 cellElement.dataset.column = column;
+                cellElement.classList.add("default");
 
                 if (board[row][column]) {
-                    if (enemy !== "Computer") {
-                        if (board[row][column] !== null && !enemy.hasAlreadyHit(row, column)) cellElement.classList.add("ship");
+                    if (owner.getName() === "Player") cellElement.classList.replace("default", "ship");
+                    if (enemy.hasAlreadyHit(row, column)) {
+                        cellElement.classList.remove("default");
+                        cellElement.classList.add("hit");
                     }
-                    if (enemy.hasAlreadyHit(row, column)) cellElement.classList.add("hit");
-                } else if (gameboard.getMissedShots()[row][column]) {
-                    cellElement.classList.add("missed");
                 } else {
-                    cellElement.classList.add("default");
+                    if (gameboard.getMissedShots()[row][column]) {
+                        cellElement.classList.replace("default", "missed");
+                        // console.log(gameboard.getMissedShots()[row][column]);
+                    }
                 }
-                rowElement.appendChild(cellElement);
+                domGrid.appendChild(cellElement);
             }
-            domGrid.appendChild(rowElement);
         }
     }
 
     // Render boards
-    renderInitialGameboards();
+    renderGameboard(game.playerGameboard, game.player, game.computer);
+    renderGameboard(game.computerGameboard, game.computer, game.player);
     // Event listeners
     computerGrid.addEventListener("click", game.playRound);
 
