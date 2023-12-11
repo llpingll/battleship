@@ -1,9 +1,12 @@
 import { game } from "./game.js";
 
 const dom = (() => {
-    // Cache dom gameboards
+    // Cache dom
     const playerGrid = document.getElementById("player-board");
     const computerGrid = document.getElementById("computer-board");
+    const modal = document.querySelector(".modal");
+    const winnerMesg = modal.querySelector(".modal-container p");
+    const playAgain = modal.querySelector(".modal-container button");
 
     // functions
     const renderGameboard = (gameboard, owner, enemy) => {
@@ -35,13 +38,23 @@ const dom = (() => {
         }
     }
 
+    const renderWinner = (player) => {
+        winnerMesg.textContent = (player.getName !== "Player") ? "You win" : "You lose";
+    }
+
+    const toggleEndGame = () => {
+        modal.classList.toggle("show");
+    }
+
     // Render boards
     renderGameboard(game.playerGameboard, game.player, game.computer);
     renderGameboard(game.computerGameboard, game.computer, game.player);
+    
     // Event listeners
     computerGrid.addEventListener("click", game.playRound);
+    playAgain.addEventListener("click", game.resetGame);
 
-    return { renderGameboard };
+    return { renderGameboard, renderWinner, toggleEndGame };
 })();
 
 export { dom };
