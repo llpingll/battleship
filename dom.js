@@ -2,8 +2,8 @@ import { game } from "./game.js";
 
 const dom = (() => {
     // Cache dom gameboards
-    const playerGrid = document.getElementById("playerBoard");
-    const computerGrid = document.getElementById("computerBoard");
+    const playerGrid = document.getElementById("player-board");
+    const computerGrid = document.getElementById("computer-board");
 
     // functions
     const renderGameboard = (gameboard, owner, enemy) => {
@@ -20,10 +20,10 @@ const dom = (() => {
 
                 if (board[row][column]) {
                     if (owner.getName() === "Player") cellElement.classList.replace("default", "ship");
-                    if (enemy.hasAlreadyHit(row, column)) {
-                        cellElement.classList.remove("default");
-                        cellElement.classList.add("hit");
-                    }
+                    if (enemy.hasAlreadyHit(row, column) && owner.getName() === "Player")
+                        cellElement.classList.replace("ship", "hit");
+                    if (enemy.hasAlreadyHit(row, column) && owner.getName() === "Computer")
+                        cellElement.classList.replace("default", "hit");
                 } else {
                     if (gameboard.getMissedShots()[row][column]) {
                         cellElement.classList.replace("default", "missed");
