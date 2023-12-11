@@ -21,10 +21,12 @@ var game = (() => {
         computer = Player("Computer");
         computerGameboard = Gameboard();
         playerGameboard = Gameboard();
-        // display placement modal (ignore until modal is completed)
+        // toggle placement modal (ignore until modal is completed)
         playerGameboard.placeShipsRandomly();// Place player ships (first do random placement then include click events for player placements)
         computerGameboard.placeShipsRandomly(); // Randomly place computer ships
-        // hide placement modal (ignore for now until modal is completed)
+        dom.renderGameboard(computerGameboard, computer, player);
+        dom.renderGameboard(playerGameboard, player, computer);
+        dom.toggleEndGame();
     }
 
     const placePlayerShips = () => {
@@ -45,23 +47,26 @@ var game = (() => {
         }
     }
 
+    const endGame = (player) => {
+        dom.renderWinner(player);
+        dom.toggleEndGame();
+    }
+
     // Game logic
     const playRound = (event) => {
         // Get domBoard co-ordinates
         const cell = event.target;
         const row = Number(cell.getAttribute('data-row'));
         const column = Number(cell.getAttribute('data-column'));
-        // console.log(row, column);
         if (player.hasAlreadyHit(row, column)) return;
         player.attack(row, column, computerGameboard);
-        // console.log("Attacked")
         dom.renderGameboard(computerGameboard, computer, player);
         // window.dispatchEvent(createComputerGameboardUpdateEvent());
-        if (computerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
+        if (computerGameboard.isGameOver()) endGame(player); // Bring up winner/draw message with reset button
         computer.randomAttack(playerGameboard);
         dom.renderGameboard(playerGameboard, player, computer);
         // window.dispatchEvent(createPlayerGameboardUpdateEvent());
-        if (playerGameboard.isGameOver()) endGame(); // Bring up winner/draw message with reset button
+        if (playerGameboard.isGameOver()) endGame(computer); // Bring up winner/draw message with reset button
     }
 
     return { computerGameboard, playerGameboard, player, computer, playRound, resetGame }

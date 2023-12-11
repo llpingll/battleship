@@ -110,18 +110,17 @@ const Gameboard = () => {
 
         if (_board[row][column]) {
             let hitIndex = 0;
-            // If vertical
-            if (column > 0 && _board[row - 1][column]) {
+            if (column > 0 && _board[row][column - 1]) {
                 let i = 1;
-                while (row - i >= 0 && _board[row - i][column]) {
+                while (column - i >= 0 && _board[row][column - i]) {
                     hitIndex++;
                     i++;
                 }
             }
             // If horizontal
-            if (row > 0 && _board[row][column - 1]) {
+            if (row > 0 && _board[row - 1][column]) {
                 let i = 1;
-                while (column - i >= 0 && _board[row][column - i]) {
+                while (row - i >= 0 && _board[row - i][column]) {
                     hitIndex++;
                     i++;
                 }
