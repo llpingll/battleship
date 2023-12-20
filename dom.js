@@ -28,17 +28,11 @@ const dom = (() => {
         for (let row = 0; row < 10; row++) {
             for (let col = 0; col < 10; col++) {
                 const cellElement = document.createElement("div");
-                cellElement.dataset.row = row;
-                cellElement.dataset.column = col;
                 cellElement.className = "cell";
-                // cellElement.addEventListener("click", (e) => {
-                //     const cell = e.target;
-                //     const row = Number(cell.getAttribute('data-row'));
-                //     const col = Number(cell.getAttribute('data-column'));
-                //     game.placementBoardOnClick(row, col);
-                // });
 
                 const cellHover = document.createElement("div");
+                cellHover.dataset.row = row;
+                cellHover.dataset.column = col;
                 cellHover.className = "cell-hover";
                 cellElement.appendChild(cellHover);
 
@@ -82,7 +76,6 @@ const dom = (() => {
                 } else {
                     if (gameboard.getMissedShots()[row][column]) {
                         cellElement.classList.replace("default", "missed");
-                        // console.log(gameboard.getMissedShots()[row][column]);
                     }
                 }
                 domGrid.appendChild(cellElement);
@@ -126,12 +119,3 @@ const dom = (() => {
 })();
 
 export { dom };
-
-// Subscribe events
-    // window.addEventListener('computerGameboardUpdate', () => {
-    //     dom.renderGameboard(game.computerGameboard);
-    // });
-
-    // window.addEventListener('playerGameboardUpdate', () => {
-    //     dom.renderGameboard(game.playerGameboard);
-    // });

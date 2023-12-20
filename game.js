@@ -10,7 +10,7 @@ var game = (() => {
     let computerGameboard = Gameboard();
     let playerGameboard = Gameboard();
 
-    // Initialize ships for placement
+    // Initialize ships & variables for player placement
     const ships = [
         Ship(5),
         Ship(4),
@@ -32,7 +32,7 @@ var game = (() => {
     let _currentShip = ships[0];
     let _currentShipName = shipNames[0];
 
-    // Create functions to get ship variables
+    // Function definitions
     const getIsVertical = () => {
         return _isVertical;
     }
@@ -41,28 +41,24 @@ var game = (() => {
         return _currentShip;
     }
 
-    // Function definitions
     // Start grid 
     const placementBoardOnClick = (event) => {
         const cell = event.target;
         const row = Number(cell.getAttribute('data-row'));
         const col = Number(cell.getAttribute('data-column'));
-        console.log(row, col);
         if (playerGameboard.placeShip(ships[currentShipIndex], row, col, _isVertical)) {
-            console.log("Ship placed");
             currentShipIndex++;
             _currentShip = ships[currentShipIndex];
             _currentShipName = shipNames[currentShipIndex];
-            console.log(playerGameboard.getBoard());
+            dom.renderGameboard(playerGameboard, player, computer);
         } else {
-            console.log("Returned");
             return;
         }
 
-        dom.updateShipName(_currentShipName);
-        dom.updateHoverLength(_currentShip.getLength(), _isVertical);
-
-        if (currentShipIndex > 5) {
+        if (currentShipIndex < 5) {
+            dom.updateShipName(_currentShipName);
+            dom.updateHoverLength(_currentShip.getLength(), _isVertical); 
+        } else {
             dom.toggleStartModal();
         }
     }
@@ -71,23 +67,31 @@ var game = (() => {
         _isVertical = !_isVertical;
     }
 
+    // End game
+    const endGame = (player) => {
+        dom.renderWinner(player);
+        dom.toggleEndModal();
+    }
+
     const resetGame = () => {
         // Reset gameboard & players
         player = Player("Player");
         computer = Player("Computer");
         computerGameboard = Gameboard();
         playerGameboard = Gameboard();
-        // toggle placement modal (ignore until modal is completed)
-        playerGameboard.placeShipsRandomly();// Place player ships (first do random placement then include click events for player placements)
-        computerGameboard.placeShipsRandomly(); // Randomly place computer ships
+        _isVertical = false;
+        currentShipIndex = 0;
+        _currentShip = ships[0];
+        _currentShipName = shipNames[0];
+        // Randomly place computer ships
+        computerGameboard.placeShipsRandomly();
+        // Dom control
         dom.renderGameboard(computerGameboard, computer, player);
         dom.renderGameboard(playerGameboard, player, computer);
-        dom.toggleEndGame();
-    }
-
-    const endGame = (player) => {
-        dom.renderWinner(player);
         dom.toggleEndModal();
+        dom.updateHoverLength(_currentShip.getLength(), _isVertical);
+        dom.updateShipName(_currentShipName);
+        dom.toggleStartModal();
     }
 
     // Game logic
@@ -107,8 +111,7 @@ var game = (() => {
         if (playerGameboard.isGameOver()) endGame(computer); // Bring up winner/draw message with reset button
     }
 
-    // Place ships
-    // playerGameboard.placeShipsRandomly();
+    // Place computer ships
     computerGameboard.placeShipsRandomly();
 
     return {
@@ -126,7 +129,3 @@ var game = (() => {
 })();
 
 export { game };
-
-// Publish events
-// const createComputerGameboardUpdateEvent = () => new Event('computerGameboardUpdated');
-// const createPlayerGameboardUpdateEvent = () => new Event('playerGameboardUpdated');
