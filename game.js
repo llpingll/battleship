@@ -51,6 +51,7 @@ var game = (() => {
             _currentShip = ships[currentShipIndex];
             _currentShipName = shipNames[currentShipIndex];
             dom.renderGameboard(playerGameboard, player, computer);
+            dom.renderPlacementBoard(playerGameboard);
         } else {
             return;
         }
@@ -89,6 +90,7 @@ var game = (() => {
         dom.renderGameboard(computerGameboard, computer, player);
         dom.renderGameboard(playerGameboard, player, computer);
         dom.toggleEndModal();
+        dom.renderPlacementBoard(playerGameboard);
         dom.updateHoverLength(_currentShip.getLength(), _isVertical);
         dom.updateShipName(_currentShipName);
         dom.toggleStartModal();

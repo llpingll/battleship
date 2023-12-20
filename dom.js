@@ -23,12 +23,15 @@ const dom = (() => {
     }
     
     // Placementboard
-    const renderPlacementBoard = () => {
-        const board = placementGrid;
+    const renderPlacementBoard = (gameboard) => {
+        const playerBoard = gameboard.getBoard();
+        const DOMboard = placementGrid;
+        DOMboard.innerHTML = '';
         for (let row = 0; row < 10; row++) {
             for (let col = 0; col < 10; col++) {
                 const cellElement = document.createElement("div");
                 cellElement.className = "cell";
+                if (playerBoard[row][col]) cellElement.classList.add("ship");
 
                 const cellHover = document.createElement("div");
                 cellHover.dataset.row = row;
@@ -36,7 +39,7 @@ const dom = (() => {
                 cellHover.className = "cell-hover";
                 cellElement.appendChild(cellHover);
 
-                board.appendChild(cellElement);
+                DOMboard.appendChild(cellElement);
             }
         }
     }
@@ -93,7 +96,7 @@ const dom = (() => {
     }
 
     // Render boards on dom load
-    renderPlacementBoard();
+    renderPlacementBoard(game.playerGameboard);
     updateShipName("Carrier");
     updateHoverLength(game.getCurrentShip().getLength(), false);
     renderGameboard(game.playerGameboard, game.player, game.computer);
@@ -109,6 +112,7 @@ const dom = (() => {
     playAgainBtn.addEventListener("click", game.resetGame);
 
     return {
+        renderPlacementBoard,
         renderGameboard,
         renderWinner,
         toggleStartModal,
