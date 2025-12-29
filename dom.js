@@ -45,16 +45,20 @@ const dom = (() => {
     }
 
     const updateHoverLength = (shipLength, isVertical) => {
-        const cellHovers = document.querySelectorAll(".cell-hover");
-        cellHovers.forEach(cellHover => {
-            cellHover.style.setProperty("--width","100%");
-            cellHover.style.setProperty("--height","100%");
-            if (!isVertical) {
-                cellHover.style.setProperty("--width",`calc(37.167px + 39.834px * ${shipLength - 1})`);
-            } else {
-                cellHover.style.setProperty("--height",`calc(37.167px + 39.834px * ${shipLength - 1})`);
-            }
-        });
+    const placementBoard = document.getElementById("placement-board");
+    const cellWidth = (placementBoard.clientWidth - 8) / 10;
+    const cellHeight = (placementBoard.clientHeight - 8) / 10;
+    
+    const cellHovers = document.querySelectorAll(".cell-hover");
+    cellHovers.forEach(cellHover => {
+        cellHover.style.setProperty("--width","100%");
+        cellHover.style.setProperty("--height","100%");
+        if (!isVertical) {
+            cellHover.style.setProperty("--width",`calc(${cellWidth}px + ${cellWidth}px * ${shipLength - 1})`);
+        } else {
+            cellHover.style.setProperty("--height",`calc(${cellHeight}px + ${cellHeight}px * ${shipLength - 1})`);
+        }
+    });
     }
 
     // Gameboards
