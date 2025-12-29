@@ -46,8 +46,8 @@ const dom = (() => {
 
     const updateHoverLength = (shipLength, isVertical) => {
     const placementBoard = document.getElementById("placement-board");
-    const cellWidth = (placementBoard.clientWidth - 8) / 10;
-    const cellHeight = (placementBoard.clientHeight - 8) / 10;
+    const cellWidth = (placementBoard.clientWidth - 2) / 10;
+    const cellHeight = (placementBoard.clientHeight - 2) / 10;
     
     const cellHovers = document.querySelectorAll(".cell-hover");
     cellHovers.forEach(cellHover => {

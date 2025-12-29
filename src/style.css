@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body {
     color: black;
     font-family: Poppins, sans-serif;
@@ -31,17 +36,17 @@ main {
 
 .grid {
     background-color: antiquewhite;
-    height: 401px;
-    width: 401px;
+    height: 400px;
+    width: 400px;
     margin: 50px 0;
     display: grid;
-    border: solid 2px black;
+    border: solid 1.5px black;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
 }
 
 .grid > div {
-    border: solid 2px black;
+    border: solid 1px black;
     height: 100%;
     width: 100%;
 }
