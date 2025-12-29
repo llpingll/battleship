@@ -64,7 +64,7 @@ main {
 }
 
 .modal {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -95,6 +95,10 @@ main {
     background-color: antiquewhite;
     padding: 30px 90px;
     border-radius: 10px;
+}
+
+.modal-container.start > p {
+    margin-top: 10px;
 }
 
 .modal.start.show {
@@ -171,6 +175,7 @@ main {
 button {
     color: antiquewhite;
     padding: 20px;
+    margin: 20px;
     border-radius: 10px;
     background-color: rgb(34, 34, 34);
     transition: transform 0.1s ease-in-out;
@@ -203,9 +208,6 @@ h1 { font-size: clamp(28px, 8vw, 120px); margin: 16px 0; }
 .modal-container.start, .modal-container.end { width: min(90vw, 600px); padding: 20px; height: auto; }
 .modal-container.start { height: auto; }
 .modal-container.start > :first-child { width: auto; }
-.cell { width: 100%; height: 100%; }
-.cell-hover { position: absolute; top: 0; left: 0; }
-.cell-hover:hover { width: 100%; height: 100%; }
 @media (max-width: 700px) {
   main { flex-direction: column; gap: 20px; padding: 0 10px; }
   main .grid { margin: 10px auto; }
