@@ -195,4 +195,20 @@ footer {
 
 .fa-github:hover {
     transform: rotate(360deg) scale(1.2);
+}/* Responsive overrides */
+:root { --max-grid: 401px; --grid-size: min(80vw, var(--max-grid)); }
+.grid { width: var(--grid-size); height: var(--grid-size); margin: 20px 0; }
+h1 { font-size: clamp(28px, 8vw, 120px); margin: 16px 0; }
+.modal { font-size: clamp(18px, 5vw, 45px); align-items: center; }
+.modal-container.start, .modal-container.end { width: min(90vw, 600px); padding: 20px; height: auto; }
+.modal-container.start { height: auto; }
+.modal-container.start > :first-child { width: auto; }
+.cell { width: 100%; height: 100%; }
+.cell-hover { position: absolute; top: 0; left: 0; }
+.cell-hover:hover { width: 100%; height: 100%; }
+@media (max-width: 700px) {
+  main { flex-direction: column; gap: 20px; padding: 0 10px; }
+  main .grid { margin: 10px auto; }
+  footer { font-size: 20px; }
+  .modal-container.start, .modal-container.end { padding: 16px; }
 }
